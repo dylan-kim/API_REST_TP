@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,8 +32,15 @@ class VilleController {
 	// Affiche toutes les villes 
 	@RequestMapping(value = "/villes", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<VilleDTO> appelGet(Model model) throws SQLException {
+	public List<VilleDTO> appelGetVilles() throws SQLException {
 		return villeService.getVilles();
+	}
+	
+	// Affiche 50 villes avec un offset
+	@RequestMapping(value = "/50villes", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<VilleDTO> appelGet50Villes(@RequestParam int offset) throws SQLException {
+		return villeService.get50Villes(offset);
 	}
 	
 	// Affiche une ville
@@ -47,7 +53,7 @@ class VilleController {
 	// Modifier les données d'une ville
 	// TO DO : mettre les params dans un body
 	// @RequestBodyParam 
-	@RequestMapping(value = "/ville/modifier", method = RequestMethod.PUT)
+	@RequestMapping(value = "/ville/modifier", method = RequestMethod.POST)
 	@ResponseBody
 	public void appelPut(@RequestParam Map<String, String> params) throws SQLException {
 		VilleDTO ville = setParamVille(params);
@@ -55,14 +61,6 @@ class VilleController {
 	}
 	
 	
-	// Insérer une nouvelle ville
-	@RequestMapping(value = "/ville/ajouter", method = RequestMethod.PUT)
-	@ResponseBody
-	public void creerVille(@RequestParam Map<String, String> params) throws SQLException {
-		VilleDTO ville = setParamVille(params);
-		villeService.updateVille(ville);
-	}
-
 	private VilleDTO setParamVille(Map<String, String> params) {
 		VilleDTO ville = new VilleDTO();
 		ville.setCodeCommune(params.get(ATTRIBUT_BDD_CODE_COMMUNE));

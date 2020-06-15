@@ -29,6 +29,14 @@ public class VilleBLOImpl implements VilleBLO{
 		return villes;
 	}
 	
+	public List<VilleDTO> get50Villes(int offset) throws SQLException{
+		List<VilleDTO> villes;
+		
+		villes = villeDAO.get50Villes(offset);
+		return villes;
+	}
+	
+	
 	public void updateVille(VilleDTO ville) throws SQLException {
 		villeDAO.updateVille(ville);
 	}

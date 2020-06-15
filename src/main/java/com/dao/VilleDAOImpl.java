@@ -78,8 +78,27 @@ public class VilleDAOImpl implements VilleDAO {
 			villes.add(ville);
 		}
 		return villes;
-
 	}
+	
+	public List<VilleDTO> get50Villes(int offset) throws SQLException {
+		@Cleanup Connection connection = ConnexionBDD.getConnexion();
+		@Cleanup ResultSet result = null;
+		
+		List<VilleDTO> villes = new ArrayList<>();
+		String requeteSQL = "SELECT * from ville_france LIMIT 50 offset ?";
+		
+		PreparedStatement statement = connection.prepareStatement(requeteSQL);
+		statement.setInt(1, offset);
+		statement.execute();
+
+		result = statement.executeQuery();
+		while (result.next()) {
+			VilleDTO ville = recupererVille(result);
+			villes.add(ville);
+		}
+		return villes;
+	}
+
 
 	public static VilleDTO recupererVille(ResultSet result) throws SQLException {
 		VilleDTO ville = new VilleDTO();

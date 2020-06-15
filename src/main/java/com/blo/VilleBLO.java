@@ -9,6 +9,7 @@ public interface VilleBLO {
 	
 	public VilleDTO getInfoVille(String codeCommune) throws SQLException;
 	public List<VilleDTO> getVilles() throws SQLException;
+	public List<VilleDTO> get50Villes(int offset) throws SQLException;
 	public void updateVille(VilleDTO ville) throws SQLException;
 
 }
