@@ -15,10 +15,10 @@ public class VilleBLOImpl implements VilleBLO{
 	@Autowired
 	private VilleDAO villeDAO;
 	
-	public VilleDTO getInfoVille() throws SQLException {
+	public VilleDTO getInfoVille(String codeCommune) throws SQLException {
 		VilleDTO ville;
 		
-		ville = villeDAO.getVille();
+		ville = villeDAO.getVille(codeCommune);
 		return ville;
 	}
 	
@@ -33,9 +33,4 @@ public class VilleBLOImpl implements VilleBLO{
 		villeDAO.updateVille(ville);
 	}
 	
-	public void addVille(VilleDTO ville) throws SQLException {
-		villeDAO.createVille(ville);
-	}
-
-
 }

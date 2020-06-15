@@ -31,21 +31,6 @@ public class VilleDAOImpl implements VilleDAO {
 
 	public static final String SQL_INSERT_VILLE = "INSERT INTO ville_france VALUES(?,?,?,?,?,?,?)";
 
-	public void createVille(VilleDTO ville) throws SQLException {
-		@Cleanup Connection connection = ConnexionBDD.getConnexion();
-
-		@Cleanup PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_VILLE_FRANCE);
-		statement.setString(1, ville.getNomCommune());
-		statement.setString(2, ville.getCodePostal());
-		statement.setString(3, ville.getLibelleAcheminement());
-		statement.setString(4, ville.getLigne5());
-		statement.setString(5, ville.getLatitude());
-		statement.setString(6, ville.getLongitude());
-		statement.setString(7, ville.getCodeCommune());
-		statement.executeQuery();
-
-	}
-
 	public void updateVille(VilleDTO ville) throws SQLException {
 		@Cleanup Connection connection = ConnexionBDD.getConnexion();
 
@@ -61,14 +46,15 @@ public class VilleDAOImpl implements VilleDAO {
 
 	}
 
-	public VilleDTO getVille() throws SQLException {
+	public VilleDTO getVille(String codeCommune) throws SQLException {
 		@Cleanup Connection connection = ConnexionBDD.getConnexion();
 		@Cleanup ResultSet result = null;
 		
 		VilleDTO ville = null;
-		String requeteSQL = "SELECT * from ville_france LIMIT 1";
+		String requeteSQL = "SELECT * from ville_france WHERE Code_commune_INSEE = ?";
 		
 		PreparedStatement statement = connection.prepareStatement(requeteSQL);
+		statement.setString(1, codeCommune);
 		statement.execute();
 		result = statement.executeQuery();
 		while (result.next()) {

@@ -40,8 +40,8 @@ class VilleController {
 	// Affiche une ville
 	@RequestMapping(value = "/ville", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public VilleDTO appelGet() throws SQLException {
-		return villeService.getInfoVille();
+	public VilleDTO appelGet(@RequestParam String codeCommune) throws SQLException {
+		return villeService.getInfoVille(codeCommune);
 	}
 
 	// Modifier les données d'une ville
