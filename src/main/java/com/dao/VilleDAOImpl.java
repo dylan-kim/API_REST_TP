@@ -29,8 +29,6 @@ public class VilleDAOImpl implements VilleDAO {
 			+ "Code_postal = ?, Libelle_acheminement = ?, Ligne_5 = ?, Latitude = ?, "
 			+ "Longitude = ? WHERE Code_commune_INSEE = ?";
 
-	public static final String SQL_INSERT_VILLE = "INSERT INTO ville_france VALUES(?,?,?,?,?,?,?)";
-
 	public void updateVille(VilleDTO ville) throws SQLException {
 		@Cleanup Connection connection = ConnexionBDD.getConnexion();
 
