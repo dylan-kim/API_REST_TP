@@ -72,7 +72,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<scope>1.18.12</scope>
+			<version>1.16.10</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
